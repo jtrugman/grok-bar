@@ -31,7 +31,7 @@ chrome.omnibox.onInputChanged.addListener(async (text, suggest) => {
     const settings = await loadSettings();
     suggest(buildSuggestions(text, settings.defaultProviderId));
   } catch (err) {
-    console.error("AI Omnibox: onInputChanged failed", String(err));
+    console.error("Search with Grok: onInputChanged failed", String(err));
     suggest([]);
   }
 });
@@ -46,7 +46,7 @@ chrome.omnibox.onInputEntered.addListener(async (text, disposition) => {
     if (!routed.ok) {
       if (routed.reason === "too_long") {
         console.warn(
-          `AI Omnibox: prompt exceeds ${MAX_PROMPT_CHARS} characters; navigation refused`
+          `Search with Grok: prompt exceeds ${MAX_PROMPT_CHARS} characters; navigation refused`
         );
         chrome.omnibox.setDefaultSuggestion({
           description: `Prompt too long (max ${MAX_PROMPT_CHARS.toLocaleString()} characters) — not opened`,
@@ -57,7 +57,7 @@ chrome.omnibox.onInputEntered.addListener(async (text, disposition) => {
 
     await openUrl(routed.url, disposition, settings.openInNewTab);
   } catch (err) {
-    console.error("AI Omnibox: onInputEntered failed", String(err));
+    console.error("Search with Grok: onInputEntered failed", String(err));
   }
 });
 
@@ -69,7 +69,7 @@ chrome.omnibox.onInputStarted.addListener(async () => {
       description: `Ask ${provider.name} (prefix with ${providerHelpList()} to switch)`,
     });
   } catch (err) {
-    console.error("AI Omnibox: onInputStarted failed", String(err));
+    console.error("Search with Grok: onInputStarted failed", String(err));
   }
 });
 
@@ -97,7 +97,7 @@ async function ensureContextMenu() {
   };
 
   contextMenuChain = contextMenuChain.then(run).catch((err) => {
-    console.error("AI Omnibox: ensureContextMenu failed", String(err));
+    console.error("Search with Grok: ensureContextMenu failed", String(err));
   });
   return contextMenuChain;
 }
@@ -137,7 +137,7 @@ chrome.contextMenus.onClicked.addListener(async (info) => {
     if (!routed.ok) {
       if (routed.reason === "too_long") {
         console.warn(
-          `AI Omnibox: selection exceeds ${MAX_PROMPT_CHARS} characters; navigation refused`
+          `Search with Grok: selection exceeds ${MAX_PROMPT_CHARS} characters; navigation refused`
         );
       }
       return;
@@ -146,7 +146,7 @@ chrome.contextMenus.onClicked.addListener(async (info) => {
     // Always new foreground tab so the page the user selected on stays open.
     await openUrl(routed.url, "newForegroundTab", true);
   } catch (err) {
-    console.error("AI Omnibox: context menu click failed", String(err));
+    console.error("Search with Grok: context menu click failed", String(err));
   }
 });
 
@@ -177,7 +177,7 @@ async function openUrl(url, disposition, preferNewTab) {
       await chrome.tabs.update({ url });
     } catch (updateErr) {
       // No active tab (or update refused): fall back to create.
-      console.warn("AI Omnibox: tabs.update failed; falling back to tabs.create", {
+      console.warn("Search with Grok: tabs.update failed; falling back to tabs.create", {
         errName: updateErr instanceof Error ? updateErr.name : "Error",
         errMessage: sanitizeErrorMessage(updateErr),
       });
@@ -185,7 +185,7 @@ async function openUrl(url, disposition, preferNewTab) {
     }
   } catch (err) {
     // Avoid logging err strings that may embed the full URL/prompt.
-    console.error("AI Omnibox: failed to open tab", {
+    console.error("Search with Grok: failed to open tab", {
       disposition,
       preferNewTab,
       urlLength: url?.length ?? 0,

@@ -28,13 +28,14 @@ npx playwright install chromium
 
 ### 1. Unit tests (`tests/`)
 
-**47 tests** with Node’s built-in test runner (`node:test`).
+**50 tests** with Node’s built-in test runner (`node:test`).
 
 | File | Focus |
 | --- | --- |
 | `tests/providers.test.js` | Grok/ChatGPT/Claude/… URLs, routing, aliases, suggestions, 16k fail-closed |
 | `tests/settings.test.js` | Allowlist, prompt never stored, storage failure paths |
 | `tests/navigation.test.js` | New tab vs current tab policy |
+| `tests/search-provider-contract.test.js` | Shared Grok default-search contract vs provider builder |
 
 These cover pure logic only (no real Chrome APIs except a tiny `chrome.storage` mock in settings tests).
 
@@ -47,6 +48,7 @@ Config: `.c8rc.json`
 - `src/router.js`
 - `src/settings.js`
 - `src/navigation.js`
+- `src/search-provider-contract.js`
 - `src/providers/**`
 
 **Excluded (on purpose):**

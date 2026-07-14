@@ -9,7 +9,7 @@ const providerNotes = document.getElementById("provider-notes");
 const status = document.getElementById("status");
 
 if (!form || !providerSelect || !openInNewTab || !contextMenuEnabled || !providerNotes || !status) {
-  throw new Error("AI Omnibox options: required DOM nodes missing");
+  throw new Error("Search with Grok options: required DOM nodes missing");
 }
 
 function populateProviders(selectedId) {
@@ -43,7 +43,7 @@ async function hydrate() {
     contextMenuEnabled.checked = settings.contextMenuEnabled;
   } catch (err) {
     status.textContent = "Could not load settings.";
-    console.error("AI Omnibox options: load failed", String(err));
+    console.error("Search with Grok options: load failed", String(err));
   }
 }
 
@@ -64,7 +64,7 @@ form.addEventListener("submit", async (event) => {
     }, 1800);
   } catch (err) {
     status.textContent = "Save failed.";
-    console.error("AI Omnibox options: save failed", String(err));
+    console.error("Search with Grok options: save failed", String(err));
   }
 });
 

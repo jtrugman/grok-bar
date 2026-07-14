@@ -78,7 +78,7 @@ export async function loadSettings() {
     return normalizeSettings(result[STORAGE_KEY], DEFAULT_SETTINGS);
   } catch (err) {
     // Intentional degraded mode: SW must remain usable if sync storage is broken.
-    console.warn("AI Omnibox: loadSettings failed; using defaults", String(err));
+    console.warn("Search with Grok: loadSettings failed; using defaults", String(err));
     return { ...DEFAULT_SETTINGS };
   }
 }
@@ -95,7 +95,7 @@ export async function saveSettings(partial) {
   try {
     await chrome.storage.sync.set({ [STORAGE_KEY]: next });
   } catch (err) {
-    console.error("AI Omnibox: saveSettings failed", String(err));
+    console.error("Search with Grok: saveSettings failed", String(err));
     throw err;
   }
 
