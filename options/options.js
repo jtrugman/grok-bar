@@ -13,7 +13,9 @@ function populateProviders(selectedId) {
   for (const provider of providers) {
     const option = document.createElement("option");
     option.value = provider.id;
-    option.textContent = provider.name;
+    const experimental =
+      provider.id === "gemini" ? " (experimental)" : "";
+    option.textContent = `${provider.name}${experimental}`;
     if (provider.id === selectedId) {
       option.selected = true;
     }
@@ -30,23 +32,36 @@ function updateNotes() {
 providerSelect.addEventListener("change", updateNotes);
 
 async function hydrate() {
-  const settings = await loadSettings();
-  populateProviders(settings.defaultProviderId);
-  openInNewTab.checked = settings.openInNewTab;
-  contextMenuEnabled.checked = settings.contextMenuEnabled;
+  try {
+    const settings = await loadSettings();
+    populateProviders(settings.defaultProviderId);
+    openInNewTab.checked = settings.openInNewTab;
+    contextMenuEnabled.checked = settings.contextMenuEnabled;
+  } catch (err) {
+    status.textContent = "Could not load settings.";
+    console.error("AI Omnibox options: load failed", String(err));
+  }
 }
 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
-  await saveSettings({
-    defaultProviderId: providerSelect.value,
-    openInNewTab: openInNewTab.checked,
-    contextMenuEnabled: contextMenuEnabled.checked,
-  });
-  status.textContent = "Saved.";
-  setTimeout(() => {
-    status.textContent = "";
-  }, 1800);
+  status.textContent = "Saving…";
+  try {
+    await saveSettings({
+      defaultProviderId: providerSelect.value,
+      openInNewTab: openInNewTab.checked,
+      contextMenuEnabled: contextMenuEnabled.checked,
+    });
+    status.textContent = "Saved.";
+    setTimeout(() => {
+      if (status.textContent === "Saved.") {
+        status.textContent = "";
+      }
+    }, 1800);
+  } catch (err) {
+    status.textContent = "Save failed.";
+    console.error("AI Omnibox options: save failed", String(err));
+  }
 });
 
 hydrate();

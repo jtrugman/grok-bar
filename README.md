@@ -111,7 +111,13 @@ Each provider implements the same shape via `createProvider(config)`:
 }
 ```
 
-Adding a provider is one file under `src/providers/` plus a one-line registration in `src/providers/index.js`.
+Adding a provider:
+
+1. Add `src/providers/<id>.js` using `createProvider({...})`.
+2. Register it in the `providers` array in `src/providers/index.js`.
+3. Add any omnibox aliases to `PROVIDER_ALIASES` in the same file.
+
+UI help text and alternate suggestions are derived from the registry; you do not hardcode provider lists elsewhere.
 
 ### Config isolation (maintenance)
 
@@ -147,9 +153,12 @@ export const grokProvider = createProvider({
 | `https://grok.com/?q=Hello` form is produced | Covered |
 | Unicode survives encode/decode | Covered |
 | Markdown survives encode/decode | Covered |
-| Long prompts (&gt;4k chars) survive | Covered |
+| Long prompts (&gt;4k chars, under 16k cap) survive | Covered |
+| Prompts over 16k chars refused (fail closed) | Covered |
 | Existing conversation paths not targeted | Covered (root `/` for Grok, `/new` for Claude) |
-| Prompt never stored locally | Design: only preferences in `chrome.storage.sync` |
+| Context menu does not apply omnibox aliases | Covered |
+| Prompt never stored in extension storage | Covered (settings allowlist + regression tests) |
+| Browser history may contain `?q=` URLs | Documented in PRIVACY.md |
 | Login state respected | Runtime (browser session cookies; extension does not override) |
 
 Manual smoke test after install:
@@ -163,14 +172,15 @@ Manual smoke test after install:
 ## Develop
 
 ```bash
-# Unit tests (Node 18+, no browser required)
-npm test
+# Full local quality gate (tests + manifest/provider validate)
+npm run check
 
-# Manifest + provider config sanity check
+# Or individually:
+npm test
 npm run validate
 ```
 
-No build step. Load the repo root as an unpacked extension. Service worker and options page use native ES modules.
+CI (GitHub Actions) runs `npm run check` on push/PR. No build step. Load the repo root as an unpacked extension. Service worker and options page use native ES modules.
 
 ### Layout
 
@@ -179,10 +189,11 @@ manifest.json
 src/
   background.js          # omnibox + context menu + tabs
   router.js              # parse aliases, call provider.buildURL
-  settings.js            # preferences only (never prompts)
+  navigation.js          # pure tab-open policy
+  settings.js            # allowlisted preferences only (never prompts)
   providers/
     types.js             # createProvider()
-    index.js             # registry + aliases
+    index.js             # registry + aliases (single inventory)
     grok.js
     chatgpt.js
     claude.js
@@ -190,6 +201,7 @@ src/
     gemini.js
 options/                 # default provider + toggles
 tests/
+.github/workflows/ci.yml
 icons/
 PRIVACY.md
 ```

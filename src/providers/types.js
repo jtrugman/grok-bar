@@ -39,10 +39,11 @@ export function createProvider(config) {
      */
     buildURL(prompt) {
       const url = new URL(baseUrl);
-      url.searchParams.set(queryParameter, prompt);
+      // Apply extras first so the prompt parameter always wins if keys collide.
       for (const [key, value] of Object.entries(extraParams)) {
         url.searchParams.set(key, value);
       }
+      url.searchParams.set(queryParameter, prompt);
       return url.toString();
     },
 

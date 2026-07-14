@@ -37,8 +37,27 @@ export function resolveProvider(id) {
 }
 
 /**
- * Short aliases accepted as a leading token in the omnibox text.
+ * Stable list of registered provider ids (single source of truth for UI lists).
+ * @returns {string[]}
+ */
+export function listProviderIds() {
+  return providers.map((p) => p.id);
+}
+
+/**
+ * Human-readable slash-separated provider id list for omnibox help text.
+ * @returns {string}
+ */
+export function providerHelpList() {
+  return listProviderIds().join(" / ");
+}
+
+/**
+ * Short aliases accepted as a leading token in the omnibox text only.
  * Example: "ai claude explain MCP" → provider=claude, prompt="explain MCP"
+ *
+ * Single-letter aliases (`g`, `c`, `p`) are intentional for speed; they only
+ * apply when followed by more tokens. Context-menu routing never uses these.
  *
  * @type {Record<string, string>}
  */

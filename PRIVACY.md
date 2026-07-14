@@ -17,12 +17,18 @@ AI Omnibox is a local-only Chrome extension. It opens AI chat websites with your
 
 ## What this extension does **not** do
 
-- Does not log prompts
+- Does not log full prompts to its own storage
 - Does not write prompts to `chrome.storage`, IndexedDB, or local files
 - Does not phone home
 - Does not include analytics or advertising SDKs
 - Does not request host permissions for AI sites (it only navigates tabs)
 - Does not inject content scripts into Grok, ChatGPT, Claude, or other AI pages
+
+## Browser history (important)
+
+Opening a provider URL of the form `https://…/?q=<your prompt>` is normal tab navigation. Chrome may record that full URL in **browser history** (and history sync, if you use it). That is Chrome behavior, not extension storage. Clear or control history with Chrome’s usual tools if you do not want prompt text retained there.
+
+Settings schema enforcement drops unknown keys (including any accidental `prompt` field) before writing preferences.
 
 ## Third-party sites
 

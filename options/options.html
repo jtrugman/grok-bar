@@ -11,8 +11,8 @@
       <header>
         <h1>AI Omnibox</h1>
         <p class="subtitle">
-          Address-bar shortcuts for AI chat. Prompts are never stored by this
-          extension.
+          Address-bar shortcuts for AI chat. This extension never stores your
+          prompts. Navigated AI URLs may still appear in browser history.
         </p>
       </header>
 
@@ -25,7 +25,7 @@
 
         <label class="field checkbox">
           <input type="checkbox" id="openInNewTab" name="openInNewTab" />
-          <span>Open results in a new tab</span>
+          <span>Open omnibox results in a new tab</span>
         </label>
 
         <label class="field checkbox">
@@ -34,7 +34,7 @@
             id="contextMenuEnabled"
             name="contextMenuEnabled"
           />
-          <span>Show “Ask …” on right-click selection</span>
+          <span>Show “Ask …” on right-click selection (always a new tab)</span>
         </label>
 
         <div class="actions">
@@ -52,12 +52,18 @@
           </li>
           <li>Type your prompt and press <kbd>Enter</kbd>.</li>
           <li>
-            Optional: prefix a provider for one shot —
+            Optional one-shot provider prefix (omnibox only):
             <code>ai claude explain MCP</code>,
             <code>ai grok summarize this</code>,
             <code>ai chatgpt write a regex</code>.
           </li>
         </ol>
+        <p class="caveat">
+          Short prefixes like <code>c</code>, <code>p</code>, and
+          <code>g</code> only apply in the address bar when followed by more
+          words. Right-click “Ask …” always uses your default provider and never
+          strips leading words from the selection.
+        </p>
         <p class="caveat">
           Provider URLs (including Grok’s <code>?q=</code>) are best-effort
           community integrations, not documented stable APIs. If a site changes
