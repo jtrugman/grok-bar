@@ -111,4 +111,6 @@ No host permissions. No content scripts. No remote code.
 
 ## License
 
-MIT. Not affiliated with xAI.
+[MIT](./LICENSE). Free to use, modify, and distribute.
+
+Not affiliated with xAI.
