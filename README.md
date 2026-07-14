@@ -64,11 +64,17 @@ This extension packages that setup, plus optional context menu and multi-provide
 
 ---
 
-## Develop
+## Develop / test
 
 ```bash
-npm run check   # tests + manifest validate
+npm install
+npx playwright install chromium   # once, for e2e
+
+npm run check        # unit + c8 coverage thresholds + manifest validate
+npm run check:full   # check + Playwright extension smoke
 ```
+
+See **[TESTING.md](./TESTING.md)** for coverage scope, e2e notes, and CI.
 
 No build step. Load the repo root as unpacked.
 

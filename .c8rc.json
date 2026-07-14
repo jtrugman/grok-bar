@@ -1,0 +1,25 @@
+{
+  "include": [
+    "src/router.js",
+    "src/settings.js",
+    "src/navigation.js",
+    "src/providers/**/*.js"
+  ],
+  "exclude": [
+    "src/background.js",
+    "options/**",
+    "tests/**",
+    "e2e/**",
+    "scripts/**",
+    "node_modules/**"
+  ],
+  "reporter": ["text", "text-summary", "lcov"],
+  "reports-dir": "coverage",
+  "check-coverage": true,
+  "lines": 90,
+  "functions": 90,
+  "branches": 80,
+  "statements": 90,
+  "all": true,
+  "skip-full": false
+}
