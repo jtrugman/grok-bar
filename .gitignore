@@ -7,3 +7,7 @@ dist/
 *.crx
 *.pem
 .chrome-profile/
+
+# Local review artifacts from the agentic quality loop (never commit; re-review must stay blind)
+CODE_REVIEW.md
+CODE_QUALITY_REVIEW.md

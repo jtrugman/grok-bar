@@ -8,6 +8,10 @@ const contextMenuEnabled = document.getElementById("contextMenuEnabled");
 const providerNotes = document.getElementById("provider-notes");
 const status = document.getElementById("status");
 
+if (!form || !providerSelect || !openInNewTab || !contextMenuEnabled || !providerNotes || !status) {
+  throw new Error("AI Omnibox options: required DOM nodes missing");
+}
+
 function populateProviders(selectedId) {
   providerSelect.replaceChildren();
   for (const provider of providers) {
