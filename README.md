@@ -12,24 +12,11 @@ What is MCP?     →  https://grok.com/?q=What%20is%20MCP%3F
 
 ---
 
-## Install (unpacked)
+## Install (first time)
 
-1. Open `chrome://extensions`.
-2. Enable **Developer mode**.
-3. Click **Load unpacked** and select this folder (the one with `manifest.json`).
-4. **Set Grok as default search** (required once):
-   - If Chrome prompts you to change the default search engine, choose **Grok**.
-   - If it does not: open `chrome://settings/searchEngines` (or **Settings → Search engine → Manage search engines**), find **Grok**, click the ⋮ menu, **Make default**.
-5. Type any question in the address bar and press Enter.
+**→ See [INSTALL.md](./INSTALL.md)** for simple step-by-step instructions.
 
-macOS and Windows only for the default-search override API. (Linux Chrome does not support `chrome_settings_overrides` the same way.)
-
-### Reload after updates
-
-If you already loaded an older build that used the `ai` keyword only:
-
-1. On `chrome://extensions`, click **Reload** on this extension.
-2. Confirm **Grok** is still (or newly) the default under `chrome://settings/searchEngines`.
+Short version: load this folder as an unpacked extension, then set **Grok** as the default search engine under `chrome://settings/searchEngines`.
 
 ---
 
