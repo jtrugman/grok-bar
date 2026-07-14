@@ -1,7 +1,7 @@
 {
-  "name": "ai-omnibox",
-  "version": "1.0.0",
-  "description": "Provider-agnostic Chrome omnibox extension for Grok, ChatGPT, Claude, Perplexity, and Gemini",
+  "name": "search-with-grok",
+  "version": "1.1.0",
+  "description": "Chrome extension: use Grok as your default address-bar search (no keyword required)",
   "private": true,
   "type": "module",
   "scripts": {

@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "AI Omnibox",
-  "short_name": "AI Omnibox",
-  "version": "1.0.0",
-  "description": "Search Grok, ChatGPT, Claude, Perplexity, and more from the Chrome address bar. Provider-agnostic, privacy-first, zero prompt storage.",
+  "name": "Search with Grok",
+  "short_name": "Grok Search",
+  "version": "1.1.0",
+  "description": "Use Grok as your Chrome address-bar search. Type a question, press Enter, open Grok. No keyword required.",
   "icons": {
     "16": "icons/icon16.png",
     "32": "icons/icon32.png",
@@ -11,7 +11,7 @@
     "128": "icons/icon128.png"
   },
   "action": {
-    "default_title": "AI Omnibox",
+    "default_title": "Search with Grok — options",
     "default_icon": {
       "16": "icons/icon16.png",
       "32": "icons/icon32.png",
@@ -25,6 +25,16 @@
   "background": {
     "service_worker": "src/background.js",
     "type": "module"
+  },
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "Grok",
+      "keyword": "grok",
+      "search_url": "https://grok.com/?q={searchTerms}",
+      "favicon_url": "https://grok.com/favicon.ico",
+      "encoding": "UTF-8",
+      "is_default": true
+    }
   },
   "omnibox": {
     "keyword": "ai"

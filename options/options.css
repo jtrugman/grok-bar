@@ -139,6 +139,26 @@ button:hover {
   margin-top: 20px;
 }
 
+.primary-usage {
+  margin-top: 0;
+  margin-bottom: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+.form-heading {
+  margin: 0 0 6px;
+  font-size: 0.95rem;
+}
+
+.form-intro {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
 .usage h2 {
   margin: 0 0 8px;
   font-size: 0.95rem;

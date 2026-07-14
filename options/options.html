@@ -3,29 +3,61 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>AI Omnibox Settings</title>
+    <title>Search with Grok — Settings</title>
     <link rel="stylesheet" href="options.css" />
   </head>
   <body>
     <main>
       <header>
-        <h1>AI Omnibox</h1>
+        <h1>Search with Grok</h1>
         <p class="subtitle">
-          Address-bar shortcuts for AI chat. This extension never stores your
-          prompts. Navigated AI URLs may still appear in browser history.
+          Normal address-bar search goes to Grok. No keyword required.
         </p>
       </header>
 
+      <section class="usage primary-usage">
+        <h2>Default search (what you want)</h2>
+        <ol>
+          <li>Install / reload this extension.</li>
+          <li>
+            If Chrome asks to change your default search engine, choose
+            <strong>Grok</strong>.
+          </li>
+          <li>
+            If it does not ask: open
+            <code>chrome://settings/searchEngines</code>, find
+            <strong>Grok</strong>, and set it as default.
+          </li>
+          <li>
+            Type any question in the address bar and press
+            <kbd>Enter</kbd>. You go to
+            <code>grok.com/?q=…</code>.
+          </li>
+        </ol>
+        <p class="caveat">
+          This uses Chrome’s search-engine override (Windows and Mac). After
+          install, confirm Grok is selected under
+          <strong>Settings → Search engine</strong>.
+        </p>
+      </section>
+
       <form id="settings-form">
+        <h2 class="form-heading">Optional: context menu &amp; <code>ai</code> keyword</h2>
+        <p class="form-intro">
+          These do <strong>not</strong> change the default address-bar search
+          (that is always Grok). They only affect right-click and the optional
+          <code>ai</code> keyword for other providers.
+        </p>
+
         <label class="field">
-          <span class="label">Default provider</span>
+          <span class="label">Context-menu / <code>ai</code> provider</span>
           <select id="defaultProviderId" name="defaultProviderId"></select>
           <span class="hint" id="provider-notes"></span>
         </label>
 
         <label class="field checkbox">
           <input type="checkbox" id="openInNewTab" name="openInNewTab" />
-          <span>Open omnibox results in a new tab</span>
+          <span>Open <code>ai</code>-keyword results in a new tab</span>
         </label>
 
         <label class="field checkbox">
@@ -44,30 +76,16 @@
       </form>
 
       <section class="usage">
-        <h2>How to use</h2>
-        <ol>
-          <li>
-            In the address bar, type <code>ai</code>, then press
-            <kbd>Space</kbd> or <kbd>Tab</kbd>.
-          </li>
-          <li>Type your prompt and press <kbd>Enter</kbd>.</li>
-          <li>
-            Optional one-shot provider prefix (omnibox only):
-            <code>ai claude explain MCP</code>,
-            <code>ai grok summarize this</code>,
-            <code>ai chatgpt write a regex</code>.
-          </li>
-        </ol>
-        <p class="caveat">
-          Short prefixes like <code>c</code>, <code>p</code>, and
-          <code>g</code> only apply in the address bar when followed by more
-          words. Right-click “Ask …” always uses your default provider and never
-          strips leading words from the selection.
+        <h2>Optional: multi-provider keyword</h2>
+        <p class="form-intro">
+          Type <code>ai</code>, then Space, then a prompt (or
+          <code>ai claude …</code>) if you want ChatGPT / Claude / etc. without
+          changing your default search.
         </p>
         <p class="caveat">
-          Provider URLs (including Grok’s <code>?q=</code>) are best-effort
-          community integrations, not documented stable APIs. If a site changes
-          its URL, only that provider’s config needs updating.
+          Grok’s <code>?q=</code> URL is a best-effort community integration,
+          not a documented xAI API. Prompts are not stored by this extension;
+          browser history may still record the navigated URL.
         </p>
       </section>
     </main>
