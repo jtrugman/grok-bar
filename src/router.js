@@ -149,9 +149,14 @@ export function buildSuggestions(text, defaultProviderId) {
     const alternates = listProviderIds().filter((id) => id !== routed.provider.id);
 
     for (const id of alternates.slice(0, 3)) {
+      const altContent = `${id} ${trimmed}`;
+      // Skip alternates that would exceed the length cap when accepted.
+      if (altContent.length > MAX_PROMPT_CHARS) {
+        continue;
+      }
       const alt = resolveProvider(id);
       suggestions.push({
-        content: `${id} ${trimmed}`,
+        content: altContent,
         description: `Ask ${alt.name}: ${escapeOmnibox(trimmed)}`,
       });
     }

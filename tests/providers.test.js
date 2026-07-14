@@ -252,6 +252,20 @@ describe("buildSuggestions + escapeOmnibox", () => {
     assert.ok(suggestions.length <= 4);
   });
 
+  it("omits alternate suggestions that would exceed MAX_PROMPT_CHARS", () => {
+    // Leave room for the primary prompt but not for "perplexity " + prompt.
+    const nearCap = "n".repeat(MAX_PROMPT_CHARS - 5);
+    const suggestions = buildSuggestions(nearCap, "grok");
+    assert.equal(suggestions[0].content, nearCap);
+    for (const s of suggestions.slice(1)) {
+      assert.ok(
+        s.content.length <= MAX_PROMPT_CHARS,
+        `alternate too long: ${s.content.length}`
+      );
+      assert.deepEqual(routeQuery(s.content, "grok").ok, true);
+    }
+  });
+
   it("does not offer alternates when an alias was used", () => {
     const suggestions = buildSuggestions("claude Hello", "grok");
     assert.equal(suggestions.length, 1);

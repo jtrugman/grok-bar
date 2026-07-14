@@ -177,10 +177,10 @@ async function openUrl(url, disposition, preferNewTab) {
       await chrome.tabs.update({ url });
     } catch (updateErr) {
       // No active tab (or update refused): fall back to create.
-      console.warn(
-        "AI Omnibox: tabs.update failed; falling back to tabs.create",
-        String(updateErr)
-      );
+      console.warn("AI Omnibox: tabs.update failed; falling back to tabs.create", {
+        errName: updateErr instanceof Error ? updateErr.name : "Error",
+        errMessage: sanitizeErrorMessage(updateErr),
+      });
       await chrome.tabs.create({ url, active: true });
     }
   } catch (err) {
