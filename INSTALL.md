@@ -3,6 +3,9 @@
 This turns your Chrome address bar into a Grok search box.  
 Type a question, press Enter, get Grok. No special keyword.
 
+**Supported for default search:** Chrome on **macOS** and **Windows**.  
+(Chrome’s “override default search engine” API is not available the same way on Linux.)
+
 ---
 
 ## 1. Open the extensions page

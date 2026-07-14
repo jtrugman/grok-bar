@@ -4,6 +4,8 @@ Chrome extension that makes **Grok your default address-bar search**.
 
 Type a question in the Chrome omnibox (the normal Google search bar), press **Enter**, land on Grok. **No keyword.** No `ai` + Space.
 
+**Platform:** default-search override works on **macOS and Windows**. Linux Chrome does not support the same settings-override API.
+
 ```text
 What is MCP?     →  https://grok.com/?q=What%20is%20MCP%3F
 ```
@@ -31,7 +33,7 @@ The extension registers a Chrome **search engine**:
 
 Chrome substitutes your address-bar text for `{searchTerms}` and navigates to Grok. That is the same path as adding a custom search engine by hand with `https://grok.com/?q=%s`.
 
-The Grok `?q=` parameter is a **best-effort community** interface (not a documented xAI API). If xAI changes it, update `manifest.json` → `chrome_settings_overrides.search_provider.search_url` (and `src/providers/grok.js`).
+The Grok `?q=` parameter is a **best-effort community** interface (not a documented xAI API). If xAI changes it, update `src/search-provider-contract.js`, keep `manifest.json` in sync, and update `src/providers/grok.js`.
 
 ---
 

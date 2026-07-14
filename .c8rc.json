@@ -3,6 +3,7 @@
     "src/router.js",
     "src/settings.js",
     "src/navigation.js",
+    "src/search-provider-contract.js",
     "src/providers/**/*.js"
   ],
   "exclude": [

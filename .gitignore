@@ -11,6 +11,7 @@ coverage/
 playwright-report/
 test-results/
 blob-report/
+.e2e-extension/
 
 # Local review artifacts from the agentic quality loop (never commit; re-review must stay blind)
 CODE_REVIEW.md

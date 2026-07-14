@@ -1,17 +1,19 @@
-# Privacy Policy — AI Omnibox
+# Privacy Policy — Search with Grok
 
 **Last updated:** 2026-07-14
 
 ## Summary
 
-AI Omnibox is a local-only Chrome extension. It opens AI chat websites with your prompt in the URL. It does **not** collect, store, or transmit prompts to the extension author or any third party controlled by this project.
+**Search with Grok** is a local-only Chrome extension. It opens Grok (and optionally other AI chat sites) with your prompt in the URL. It does **not** collect, store, or transmit prompts to the extension author or any third party controlled by this project.
+
+(Formerly referred to in early drafts as “AI Omnibox.”)
 
 ## What data is handled
 
 | Data | Stored by extension? | Where it goes |
 | --- | --- | --- |
-| Omnibox / selection prompt text | **No** | Passed only into a tab URL for the AI provider you chose (e.g. grok.com) |
-| Default provider preference | Yes (Chrome `storage.sync`) | Your browser (optionally synced by Chrome to your Google account) |
+| Address-bar / selection prompt text | **No** | Passed only into a tab URL for the AI provider (e.g. grok.com) |
+| Optional provider preference (context menu / `ai` keyword) | Yes (Chrome `storage.sync`) | Your browser (optionally synced by Chrome to your Google account) |
 | Open-in-new-tab preference | Yes | Same as above |
 | Context-menu on/off preference | Yes | Same as above |
 
@@ -32,7 +34,7 @@ Settings schema enforcement drops unknown keys (including any accidental `prompt
 
 ## Third-party sites
 
-When you submit a prompt, Chrome navigates to a third-party AI website (Grok / xAI, ChatGPT / OpenAI, Claude / Anthropic, Perplexity, or Gemini / Google). Those sites process your prompt under **their** privacy policies and account state (including whether you are signed in). This extension does not control that processing.
+When you submit a prompt, Chrome navigates to a third-party AI website (Grok / xAI by default; optionally ChatGPT / OpenAI, Claude / Anthropic, Perplexity, or Gemini / Google via the optional keyword or context menu). Those sites process your prompt under **their** privacy policies and account state (including whether you are signed in). This extension does not control that processing.
 
 ## Network access
 

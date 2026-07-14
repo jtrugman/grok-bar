@@ -1,5 +1,5 @@
 /**
- * AI Omnibox — service worker
+ * Search with Grok — service worker
  *
  * Flow:
  *   Omnibox / context menu

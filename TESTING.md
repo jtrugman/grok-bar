@@ -69,11 +69,12 @@ HTML/LCOV output: `coverage/` after `npm run test:coverage`.
 
 ### 3. Manifest validate (`scripts/validate-manifest.js`)
 
-Checks:
+Checks (exact contract from `src/search-provider-contract.js`):
 
 - Manifest V3 shape
-- Grok default search URL is `https://grok.com/?q={searchTerms}`
-- `is_default: true`
+- Grok `search_provider` fields equal the shared contract  
+  (`search_url` must be exactly `https://grok.com/?q={searchTerms}`, `is_default: true`, plus name/keyword/encoding/favicon_url)
+- Grok provider URL builder stays on `https://grok.com/` with query key `q`
 - Every registered provider builds a valid HTTPS URL
 
 ### 4. Playwright e2e (`e2e/`)
