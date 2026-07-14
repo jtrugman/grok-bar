@@ -259,9 +259,23 @@ describe("buildSuggestions + escapeOmnibox", () => {
   });
 
   it("surfaces too-long prompts in the dropdown", () => {
-    const suggestions = buildSuggestions("z".repeat(MAX_PROMPT_CHARS + 50), "grok");
+    const overlong = "z".repeat(MAX_PROMPT_CHARS + 50);
+    const suggestions = buildSuggestions(overlong, "grok");
     assert.equal(suggestions.length, 1);
     assert.match(suggestions[0].description, /too long/i);
+  });
+
+  it("keeps overlong suggestion content non-navigable (fail closed)", () => {
+    const overlong = "z".repeat(MAX_PROMPT_CHARS + 50);
+    const suggestions = buildSuggestions(overlong, "grok");
+    // Chrome feeds suggestion.content into onInputEntered; that path must
+    // still refuse navigation rather than silently truncate.
+    assert.equal(suggestions[0].content, overlong);
+    assert.deepEqual(routeQuery(suggestions[0].content, "grok"), {
+      ok: false,
+      reason: "too_long",
+      max: MAX_PROMPT_CHARS,
+    });
   });
 
   it("escapes omnibox XML metacharacters", () => {

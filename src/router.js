@@ -120,10 +120,13 @@ export function buildSuggestions(text, defaultProviderId) {
   }
 
   if (trimmed.length > MAX_PROMPT_CHARS) {
+    // Keep the full text as content so accepting the suggestion still fails
+    // routeQuery as too_long (fail closed). Never put a truncated slice here:
+    // Chrome feeds suggestion content into onInputEntered as the submit text.
     return [
       {
-        content: trimmed.slice(0, 80),
-        description: `Prompt too long (max ${MAX_PROMPT_CHARS.toLocaleString()} characters)`,
+        content: trimmed,
+        description: `Prompt too long (max ${MAX_PROMPT_CHARS.toLocaleString()} characters) — will not open`,
       },
     ];
   }

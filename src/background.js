@@ -48,6 +48,9 @@ chrome.omnibox.onInputEntered.addListener(async (text, disposition) => {
         console.warn(
           `AI Omnibox: prompt exceeds ${MAX_PROMPT_CHARS} characters; navigation refused`
         );
+        chrome.omnibox.setDefaultSuggestion({
+          description: `Prompt too long (max ${MAX_PROMPT_CHARS.toLocaleString()} characters) — not opened`,
+        });
       }
       return;
     }
@@ -181,11 +184,23 @@ async function openUrl(url, disposition, preferNewTab) {
       await chrome.tabs.create({ url, active: true });
     }
   } catch (err) {
+    // Avoid logging err strings that may embed the full URL/prompt.
     console.error("AI Omnibox: failed to open tab", {
       disposition,
       preferNewTab,
       urlLength: url?.length ?? 0,
-      err: String(err),
+      errName: err instanceof Error ? err.name : "Error",
+      errMessage: sanitizeErrorMessage(err),
     });
   }
+}
+
+/**
+ * Strip URL-like tokens from error messages before logging.
+ * @param {unknown} err
+ * @returns {string}
+ */
+function sanitizeErrorMessage(err) {
+  const raw = err instanceof Error ? err.message : String(err);
+  return raw.replace(/https?:\/\/\S+/gi, "[url]").slice(0, 200);
 }
