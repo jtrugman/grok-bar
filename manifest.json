@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "AI Omnibox",
+  "short_name": "AI Omnibox",
+  "version": "1.0.0",
+  "description": "Search Grok, ChatGPT, Claude, Perplexity, and more from the Chrome address bar. Provider-agnostic, privacy-first, zero prompt storage.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "AI Omnibox",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": false
+  },
+  "background": {
+    "service_worker": "src/background.js",
+    "type": "module"
+  },
+  "omnibox": {
+    "keyword": "ai"
+  },
+  "permissions": [
+    "storage",
+    "contextMenus"
+  ],
+  "host_permissions": [],
+  "minimum_chrome_version": "109"
+}

@@ -1,0 +1,24 @@
+{
+  "name": "ai-omnibox",
+  "version": "1.0.0",
+  "description": "Provider-agnostic Chrome omnibox extension for Grok, ChatGPT, Claude, Perplexity, and Gemini",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/**/*.test.js",
+    "validate": "node scripts/validate-manifest.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "chrome-extension",
+    "omnibox",
+    "grok",
+    "xai",
+    "chatgpt",
+    "claude",
+    "perplexity"
+  ],
+  "license": "MIT"
+}

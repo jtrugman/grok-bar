@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Omnibox Settings</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>AI Omnibox</h1>
+        <p class="subtitle">
+          Address-bar shortcuts for AI chat. Prompts are never stored by this
+          extension.
+        </p>
+      </header>
+
+      <form id="settings-form">
+        <label class="field">
+          <span class="label">Default provider</span>
+          <select id="defaultProviderId" name="defaultProviderId"></select>
+          <span class="hint" id="provider-notes"></span>
+        </label>
+
+        <label class="field checkbox">
+          <input type="checkbox" id="openInNewTab" name="openInNewTab" />
+          <span>Open results in a new tab</span>
+        </label>
+
+        <label class="field checkbox">
+          <input
+            type="checkbox"
+            id="contextMenuEnabled"
+            name="contextMenuEnabled"
+          />
+          <span>Show “Ask …” on right-click selection</span>
+        </label>
+
+        <div class="actions">
+          <button type="submit" id="save">Save</button>
+          <span id="status" role="status" aria-live="polite"></span>
+        </div>
+      </form>
+
+      <section class="usage">
+        <h2>How to use</h2>
+        <ol>
+          <li>
+            In the address bar, type <code>ai</code>, then press
+            <kbd>Space</kbd> or <kbd>Tab</kbd>.
+          </li>
+          <li>Type your prompt and press <kbd>Enter</kbd>.</li>
+          <li>
+            Optional: prefix a provider for one shot —
+            <code>ai claude explain MCP</code>,
+            <code>ai grok summarize this</code>,
+            <code>ai chatgpt write a regex</code>.
+          </li>
+        </ol>
+        <p class="caveat">
+          Provider URLs (including Grok’s <code>?q=</code>) are best-effort
+          community integrations, not documented stable APIs. If a site changes
+          its URL, only that provider’s config needs updating.
+        </p>
+      </section>
+    </main>
+    <script type="module" src="options.js"></script>
+  </body>
+</html>
