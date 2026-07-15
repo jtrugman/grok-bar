@@ -28,7 +28,9 @@ npx playwright install chromium
 
 ### 1. Unit tests (`tests/`)
 
-**50 tests** with Node’s built-in test runner (`node:test`).
+**50 tests** via `scripts/run-unit-tests.mjs` (walks `tests/` with `fs`, then runs
+`node --test` on explicit paths). Avoids shell/Node-version globs that break on
+Node 20 / GitHub Actions.
 
 | File | Focus |
 | --- | --- |
